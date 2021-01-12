@@ -1,22 +1,23 @@
 package com.awesome.model
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class InMemoryRepoServiceTest {
     private val service = InMemoryRepoService()
 
-    private val rabbitRepo = Repo("rabbit", "super lib1", 5, LocalDateTime.now())
-    private val legRepo = Repo("leg", "super lib2", 5, LocalDateTime.now())
-    private val octopusRepo = Repo("octopus", "super lib3", 5, LocalDateTime.now())
-    private val horseRepo = Repo("horse", "super lib4", 5, LocalDateTime.now())
-    private val abbotRepo = Repo("abbot", "super lib5", 5, LocalDateTime.now())
-    private val legendaryRepo = Repo("legendary", "super lib", 5, LocalDateTime.now())
-    private val eggsRepo = Repo("eggs", "super lib", 5, LocalDateTime.now())
-    private val ornamentsRepo = Repo("ornaments", "super lib", 5, LocalDateTime.now())
-    private val octoberRepo = Repo("october", "super lib", 5, LocalDateTime.now())
+    private val rabbitRepo = Repo("rabbit", "super lib1", 5, LocalDate.now(), "All")
+    private val legRepo = Repo("leg", "super lib2", 5, LocalDate.now(), "All")
+    private val octopusRepo = Repo("octopus", "super lib3", 5, LocalDate.now(), "All")
+    private val horseRepo = Repo("horse", "super lib4", 5, LocalDate.now(), "All")
+    private val abbotRepo = Repo("abbot", "super lib5", 5, LocalDate.now(), "All")
+    private val legendaryRepo = Repo("legendary", "super lib", 5, LocalDate.now(), "All")
+    private val eggsRepo = Repo("eggs", "super lib", 5, LocalDate.now(), "All")
+    private val ornamentsRepo = Repo("ornaments", "super lib", 5, LocalDate.now(), "All")
+    private val octoberRepo = Repo("october", "super lib", 5, LocalDate.now(), "All")
 
     @BeforeEach
     fun setUp() {

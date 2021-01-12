@@ -14,7 +14,7 @@ class RepoController(
 ) {
 
     @GetMapping("/find")
-    public fun findRepos(
+    fun findRepos(
         @RequestParam(required = false, defaultValue = "") namePart: String,
         @RequestParam(required = false, defaultValue = "0") minStars: Int
     ): ResponseEntity<List<Repo>> {

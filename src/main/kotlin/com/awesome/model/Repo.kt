@@ -1,10 +1,12 @@
 package com.awesome.model
 
-import java.time.LocalDateTime
+import java.time.LocalDate
+
 
 data class Repo(
     val name: String,
     val description: String,
     val starsCount: Int,
-    val lastCommit: LocalDateTime
+    val lastCommit: LocalDate,
+    val section: String
 )

@@ -1,11 +1,13 @@
 package com.awesome.model
 
 import org.springframework.stereotype.Service
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.CopyOnWriteArraySet
 
 @Service
 class InMemoryRepoService : RepoService {
 
-    private val repoListByNamePart: MutableMap<String, MutableSet<Repo>> = mutableMapOf()
+    private val repoListByNamePart: MutableMap<String, MutableSet<Repo>> = ConcurrentHashMap()
 
     override fun findRepoByNamePart(namePart: String): Set<Repo> {
         return repoListByNamePart.getOrDefault(namePart, mutableSetOf())
@@ -14,7 +16,7 @@ class InMemoryRepoService : RepoService {
     override fun saveRepo(repo: Repo) {
         val nameParts = getNameParts(repo.name)
         for (namePart in nameParts) {
-            val repoSet = repoListByNamePart.getOrDefault(namePart, mutableSetOf())
+            val repoSet = repoListByNamePart.getOrDefault(namePart, CopyOnWriteArraySet())
             repoSet.add(repo)
             repoListByNamePart[namePart] = repoSet
         }
