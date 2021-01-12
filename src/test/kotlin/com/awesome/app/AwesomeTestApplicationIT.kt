@@ -1,4 +1,4 @@
-package com.awesomeTest.app
+package com.awesome.app
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

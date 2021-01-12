@@ -1,4 +1,4 @@
-package com.awesomeTest.model
+package com.awesome.model
 
 interface RepoService {
 

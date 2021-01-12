@@ -1,7 +1,6 @@
-package com.awesomeTest.model
+package com.awesome.model
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime

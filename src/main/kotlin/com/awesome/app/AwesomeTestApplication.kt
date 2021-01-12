@@ -1,4 +1,4 @@
-package com.awesomeTest.app
+package com.awesome.app
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
