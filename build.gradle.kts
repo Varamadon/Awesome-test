@@ -15,17 +15,13 @@ repositories {
     mavenCentral()
 }
 
-extra["vaadinVersion"] = "14.4.5"
-
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.vaadin:vaadin-spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -33,19 +29,9 @@ dependencies {
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("com.vaadin:vaadin-bom:${property("vaadinVersion")}")
-    }
-}
-
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
