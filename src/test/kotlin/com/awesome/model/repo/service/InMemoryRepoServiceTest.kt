@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
-class InMemoryRepoServiceTest {
+internal class InMemoryRepoServiceTest {
     private val service = InMemoryRepoService()
 
     private val rabbitRepo = Repo("rabbit", "super lib1", 5, LocalDate.now(), "All")
