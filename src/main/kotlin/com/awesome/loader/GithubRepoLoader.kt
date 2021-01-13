@@ -1,7 +1,6 @@
 package com.awesome.loader
 
-import com.awesome.loader.api.AuthProvider
-import com.awesome.loader.api.AuthProviderImpl
+import com.awesome.loader.api.auth.AuthProvider
 import com.awesome.model.repo.Repo
 import com.awesome.model.repo.service.RepoService
 import org.commonmark.node.Heading

@@ -1,4 +1,4 @@
-package com.awesome.loader.api
+package com.awesome.loader.api.auth
 
 interface AuthProvider {
     fun provideToken(): String
