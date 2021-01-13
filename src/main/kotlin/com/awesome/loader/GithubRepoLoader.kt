@@ -1,8 +1,8 @@
 package com.awesome.loader
 
 import com.awesome.loader.api.GithubApiInteractor
-import com.awesome.model.repo.Repo
-import com.awesome.model.repo.service.RepoService
+import com.awesome.model.Repo
+import com.awesome.model.service.RepoService
 import org.commonmark.node.Heading
 import org.commonmark.node.Link
 import org.commonmark.node.Node
@@ -74,10 +74,9 @@ class GithubRepoLoader(
                 repoInfo["name"] as String,
                 if (repoInfo["description"] != null) repoInfo["description"] as String else "",
                 repoInfo["stargazers_count"] as Int,
-                getLocalDateFromISO8601String(repoInfo["pushed_at"] as String),
-                sectionName
+                getLocalDateFromISO8601String(repoInfo["pushed_at"] as String)
             )
-            repoService.saveRepo(repo)
+            repoService.saveRepo(repo, sectionName)
             log.debug("Saved " + repo.name)
         } catch (e: Exception) {
             log.error("ERROR loading $link" + e.message)

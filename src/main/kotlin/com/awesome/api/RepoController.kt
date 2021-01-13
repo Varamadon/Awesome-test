@@ -1,7 +1,7 @@
 package com.awesome.api
 
-import com.awesome.model.repo.Repo
-import com.awesome.model.repo.service.RepoService
+import com.awesome.model.Repo
+import com.awesome.model.service.RepoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller

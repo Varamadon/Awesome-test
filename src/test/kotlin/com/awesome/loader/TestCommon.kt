@@ -3,13 +3,9 @@ package com.awesome.loader
 import com.awesome.loader.api.GithubApiInteractor
 import com.awesome.loader.api.auth.AuthProvider
 import com.awesome.loader.api.githubLinkPrefix
-import com.awesome.model.repo.Repo
-import com.awesome.model.repo.service.RepoService
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpMethod
-import org.springframework.http.ResponseEntity
-import org.springframework.lang.Nullable
-import org.springframework.web.client.RestClientException
+import com.awesome.model.Repo
+import com.awesome.model.Section
+import com.awesome.model.service.RepoService
 import org.springframework.web.client.RestTemplate
 import java.lang.IllegalArgumentException
 import java.util.concurrent.atomic.AtomicInteger
@@ -21,8 +17,12 @@ class MockRepoService : RepoService {
         return emptySet()
     }
 
-    override fun saveRepo(repo: Repo) {
+    override fun saveRepo(repo: Repo, sectionTitle: String) {
         savedCount.incrementAndGet()
+    }
+
+    override fun getSections(minStars: Int): List<Section> {
+        return emptyList()
     }
 }
 
