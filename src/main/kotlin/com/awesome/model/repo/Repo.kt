@@ -1,4 +1,4 @@
-package com.awesome.model
+package com.awesome.model.repo
 
 import java.time.LocalDate
 

@@ -1,7 +1,9 @@
 package com.awesome.loader
 
-import com.awesome.model.Repo
-import com.awesome.model.RepoService
+import com.awesome.loader.api.AuthProvider
+import com.awesome.loader.api.AuthProviderImpl
+import com.awesome.model.repo.Repo
+import com.awesome.model.repo.service.RepoService
 import org.commonmark.node.Heading
 import org.commonmark.node.Link
 import org.commonmark.node.Node
@@ -12,7 +14,6 @@ import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 import org.commonmark.parser.Parser
-import java.lang.Exception
 import java.time.LocalDate
 import java.util.concurrent.Executors
 

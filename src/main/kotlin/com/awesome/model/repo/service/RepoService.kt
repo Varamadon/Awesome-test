@@ -1,4 +1,6 @@
-package com.awesome.model
+package com.awesome.model.repo.service
+
+import com.awesome.model.repo.Repo
 
 interface RepoService {
 

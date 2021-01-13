@@ -38,3 +38,4 @@ out/
 gradlew
 gradlew.bat
 gradle/
+src/main/kotlin/com/awesome/loader/api/AuthProviderImpl.kt

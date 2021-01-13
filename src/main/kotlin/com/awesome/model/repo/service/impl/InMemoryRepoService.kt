@@ -1,5 +1,7 @@
-package com.awesome.model
+package com.awesome.model.repo.service.impl
 
+import com.awesome.model.repo.Repo
+import com.awesome.model.repo.service.RepoService
 import org.springframework.stereotype.Service
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArraySet

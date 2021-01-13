@@ -1,10 +1,11 @@
-package com.awesome.model
+package com.awesome.model.repo.service
 
+import com.awesome.model.repo.Repo
+import com.awesome.model.repo.service.impl.InMemoryRepoService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 class InMemoryRepoServiceTest {
     private val service = InMemoryRepoService()
