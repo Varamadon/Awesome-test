@@ -1,9 +1,15 @@
 package com.awesome.loader
 
 import com.awesome.loader.api.GithubApiInteractor
+import com.awesome.loader.api.auth.AuthProvider
 import com.awesome.loader.api.githubLinkPrefix
 import com.awesome.model.repo.Repo
 import com.awesome.model.repo.service.RepoService
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
+import org.springframework.http.ResponseEntity
+import org.springframework.lang.Nullable
+import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
 import java.lang.IllegalArgumentException
 import java.util.concurrent.atomic.AtomicInteger
@@ -18,7 +24,6 @@ class MockRepoService : RepoService {
     override fun saveRepo(repo: Repo) {
         savedCount.incrementAndGet()
     }
-
 }
 
 class MockApiInteractor : GithubApiInteractor {
@@ -37,8 +42,26 @@ class MockApiInteractor : GithubApiInteractor {
             Pair("pushed_at", "2017-10-19T17:04:49Z")
         )
     }
+}
+
+const val testToken = "testToken"
+const val testUser = "testUser"
+const val testPassword = "testPassword"
+
+class MockAuthProvider: AuthProvider {
+    override fun provideToken(): String {
+        return testToken
+    }
+
+    override fun provideBasicCredentials(): Pair<String, String> {
+        return Pair(testUser, testPassword)
+    }
 
 }
+
+const val testRepoLink = "https://github.com/spawnproc/bpe/ololo/v1"
+const val testRepoApiLink = "https://api.github.com/repos/spawnproc/bpe"
+const val testBrokenRepoLink = "https://gittrtrthub.com/spawnproc/bpe"
 
 const val testMd =
     "# Awesome Elixir [![Build Status](https://api.travis-ci.org/h4cc/awesome-elixir.svg?branch=master)](https://travis-ci.org/h4cc/awesome-elixir) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)\n" +
