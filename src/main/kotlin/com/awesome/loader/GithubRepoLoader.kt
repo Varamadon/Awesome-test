@@ -74,7 +74,7 @@ class GithubRepoLoader(
                 repoInfo["name"] as String,
                 if (repoInfo["description"] != null) repoInfo["description"] as String else "",
                 repoInfo["stargazers_count"] as Int,
-                getLocalDateFromISO8601String(repoInfo["pushed_at"] as String)
+                getLocalDateFromISO8601String(repoInfo["last_commit_date"] as String)
             )
             repoService.saveRepo(repo, sectionName)
         } catch (e: Exception) {

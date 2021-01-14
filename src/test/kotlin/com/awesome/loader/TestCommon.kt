@@ -39,7 +39,7 @@ class MockApiInteractor : GithubApiInteractor {
             Pair("name", "testName" + loadedCount.getAndIncrement()),
             Pair("description", "testDescription"),
             Pair("stargazers_count", 140),
-            Pair("pushed_at", "2017-10-19T17:04:49Z")
+            Pair("last_commit_date", "2017-10-19T17:04:49Z")
         )
     }
 }
@@ -61,6 +61,7 @@ class MockAuthProvider: AuthProvider {
 
 const val testRepoLink = "https://github.com/spawnproc/bpe/ololo/v1"
 const val testRepoApiLink = "https://api.github.com/repos/spawnproc/bpe"
+const val testRepoCommitsApiLink = "https://api.github.com/repos/spawnproc/bpe/commits"
 const val testBrokenRepoLink = "https://gittrtrthub.com/spawnproc/bpe"
 
 const val testMd =
