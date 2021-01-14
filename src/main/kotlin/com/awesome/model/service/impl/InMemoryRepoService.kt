@@ -3,14 +3,17 @@ package com.awesome.model.service.impl
 import com.awesome.model.Repo
 import com.awesome.model.Section
 import com.awesome.model.service.RepoService
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import java.util.Comparator
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.PriorityBlockingQueue
 
 @Service
 class InMemoryRepoService : RepoService {
+
+    private val log = LoggerFactory.getLogger(javaClass)
 
     private val repoListByNamePart: MutableMap<String, MutableSet<Repo>> = ConcurrentHashMap()
     private val reposBySectionTitle: MutableMap<String, PriorityBlockingQueue<Repo>> = ConcurrentHashMap()
@@ -20,8 +23,11 @@ class InMemoryRepoService : RepoService {
     }
 
     override fun saveRepo(repo: Repo, sectionTitle: String) {
+        log.debug("Start saving " + repo.name)
         saveRepoToSection(repo, sectionTitle)
+        log.debug("Saved " + repo.name + " to sections")
         saveRepoByParts(repo)
+        log.debug("Finished saving " + repo.name)
     }
 
     private fun saveRepoToSection(repo: Repo, sectionTitle: String) {
@@ -42,7 +48,7 @@ class InMemoryRepoService : RepoService {
     override fun getSections(minStars: Int): List<Section> {
         val result = mutableListOf<Section>()
         for (sectionTitle in reposBySectionTitle.keys) {
-            val repos = reposBySectionTitle[sectionTitle] ?: getPriorityBlockingQueue()
+            val repos = PriorityBlockingQueue(reposBySectionTitle[sectionTitle] ?: getPriorityBlockingQueue())
             val eligibleRepos = mutableListOf<Repo>()
             while (!repos.isEmpty()) {
                 val nextRepo = repos.poll()

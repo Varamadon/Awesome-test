@@ -65,6 +65,23 @@ internal class InMemoryRepoServiceTest {
         assertTrue(sections.map { it.title }.contains("Medium"))
     }
 
+    @Test
+    fun testMultipleSectionsGetting() {
+        val sections = service.getSections(50)
+        printSections(sections)
+
+        assertTrue(sections.map { it.title }.contains("All"))
+        assertTrue(!sections.map { it.title }.contains("Small"))
+        assertTrue(sections.map { it.title }.contains("Medium"))
+
+        val sections2 = service.getSections(50)
+        printSections(sections)
+
+        assertTrue(sections2.map { it.title }.contains("All"))
+        assertTrue(!sections2.map { it.title }.contains("Small"))
+        assertTrue(sections2.map { it.title }.contains("Medium"))
+    }
+
     private fun printSections(sections: List<Section>) {
         for (section in sections) {
             println(section.title)

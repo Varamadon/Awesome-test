@@ -77,9 +77,8 @@ class GithubRepoLoader(
                 getLocalDateFromISO8601String(repoInfo["pushed_at"] as String)
             )
             repoService.saveRepo(repo, sectionName)
-            log.debug("Saved " + repo.name)
         } catch (e: Exception) {
-            log.error("ERROR loading $link" + e.message)
+            log.warn("ERROR loading $link" + e.message)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.awesome.api
 
 import com.awesome.model.Repo
+import com.awesome.model.Section
 import com.awesome.model.service.RepoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,10 +20,18 @@ class RepoController(
         @RequestParam(required = false, defaultValue = "0") minStars: Int
     ): ResponseEntity<List<Repo>> {
         val resultList = repoService.findRepoByNamePart(namePart)
-            .filter {
-                it -> it.starsCount >= minStars
+            .filter { it ->
+                it.starsCount >= minStars
             }
 
+        return ResponseEntity(resultList, HttpStatus.OK)
+    }
+
+    @GetMapping("/")
+    fun listSections(
+        @RequestParam(required = false, defaultValue = "0") minStars: Int
+    ): ResponseEntity<List<Section>> {
+        val resultList = repoService.getSections(minStars);
         return ResponseEntity(resultList, HttpStatus.OK)
     }
 }

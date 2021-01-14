@@ -1,6 +1,7 @@
 package com.awesome.loader.api
 
 import com.awesome.loader.api.auth.AuthProvider
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -17,6 +18,8 @@ class GithubApiInteractorIml(
     private val authProvider: AuthProvider
 ): GithubApiInteractor {
 
+    private val log = LoggerFactory.getLogger(javaClass)
+
     override fun getReadmeMD(restTemplate: RestTemplate): String {
         val readmeResponse = restTemplate.exchange(
             awesomeReadmeLink,
@@ -24,12 +27,12 @@ class GithubApiInteractorIml(
             getHttpRequestEntity(),
             String::class.java
         )
-
+        log.debug("Loaded readme")
         return readmeResponse.body ?: ""
     }
 
     override fun getRepoInfo(restTemplate: RestTemplate, repoLink: String): Map<*, *> {
-        if (!repoLink.startsWith(githubLinkPrefix)) throw IllegalArgumentException()
+        if (!repoLink.startsWith(githubLinkPrefix)) throw IllegalArgumentException("This is not github repo")
         val apiLink = getApiLink(repoLink)
         val repoResponse = restTemplate.exchange(
             apiLink,
@@ -37,13 +40,15 @@ class GithubApiInteractorIml(
             getHttpRequestEntity(),
             Map::class.java
         )
-        return repoResponse.body ?: throw IllegalArgumentException()
+        log.debug("Loaded $repoLink")
+        return repoResponse.body ?: throw IllegalArgumentException("Loaded empty repo info")
     }
 
     private fun getHttpRequestEntity(): HttpEntity<String> {
         val headers = HttpHeaders()
         val credentials = authProvider.provideBasicCredentials()
-        headers.setBasicAuth(credentials.first, credentials.second)
+        //headers.setBasicAuth(credentials.first, credentials.second)
+        headers.setBearerAuth(authProvider.provideToken())
         return HttpEntity(headers)
     }
 
