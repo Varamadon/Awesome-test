@@ -39,3 +39,5 @@ gradlew
 gradlew.bat
 gradle/
 src/main/kotlin/com/awesome/loader/api/auth/AuthProviderImpl.kt
+node_modules/
+target/

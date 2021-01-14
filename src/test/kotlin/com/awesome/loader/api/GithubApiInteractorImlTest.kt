@@ -31,7 +31,7 @@ internal class GithubApiInteractorImlTest {
         val readme = "ololo"
         val response = ResponseEntity(readme, HttpStatus.OK)
         val headers = HttpHeaders()
-        headers.setBasicAuth(testUser, testPassword)
+        headers.setBearerAuth(testToken)
         val entity = HttpEntity<String>(headers)
         `when`(restTemplate.exchange(
             ArgumentMatchers.eq(awesomeReadmeLink),

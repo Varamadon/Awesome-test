@@ -13,8 +13,8 @@ class AwesomeDaemon(
     private val log = LoggerFactory.getLogger(javaClass)
 
     override fun afterPropertiesSet() {
-        githubRepoLoader.load()
-        githubRepoLoader.awaitCompletion()
-        log.info("Loading complete!")
+//        githubRepoLoader.load()
+//        githubRepoLoader.awaitCompletion()
+//        log.info("Loading complete!")
     }
 }

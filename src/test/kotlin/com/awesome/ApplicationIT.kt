@@ -1,10 +1,10 @@
-package com.awesome.app
+package com.awesome
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class AwesomeTestApplicationIT {
+class ApplicationIT {
 
     @Test
     fun contextLoads() {
