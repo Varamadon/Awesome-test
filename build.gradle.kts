@@ -19,6 +19,7 @@ repositories {
 }
 
 extra["vaadinVersion"] = "14.4.6"
+val karibudslVersion = "1.0.4"
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
@@ -31,6 +32,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.atlassian.commonmark:commonmark:0.16.1")
     implementation("com.vaadin:vaadin-spring-boot-starter")
+    implementation("com.github.mvysny.karibudsl:karibu-dsl:$karibudslVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.3.1")
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.3.1")
