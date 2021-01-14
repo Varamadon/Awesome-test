@@ -22,14 +22,15 @@ class GithubApiInteractorIml(
     private val log = LoggerFactory.getLogger(javaClass)
 
     override fun getReadmeMD(restTemplate: RestTemplate): String {
-        val readmeResponse = restTemplate.exchange(
-            awesomeReadmeLink,
-            HttpMethod.GET,
-            getHttpRequestEntity(),
-            String::class.java
-        )
-        log.debug("Loaded readme")
-        return readmeResponse.body ?: ""
+//        val readmeResponse = restTemplate.exchange(
+//            awesomeReadmeLink,
+//            HttpMethod.GET,
+//            getHttpRequestEntity(),
+//            String::class.java
+//        )
+//        log.debug("Loaded readme")
+//        return readmeResponse.body ?: ""
+        return testMd
     }
 
     override fun getRepoInfo(restTemplate: RestTemplate, repoLink: String): Map<*, *> {
