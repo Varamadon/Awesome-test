@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class AwesomeDaemon(
-    val githubRepoLoader: GithubRepoLoader,
-    val mainView: MainView
+    val githubRepoLoader: GithubRepoLoader
 ) : InitializingBean {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -18,6 +17,5 @@ class AwesomeDaemon(
         githubRepoLoader.load()
         githubRepoLoader.awaitCompletion()
         log.info("Loading complete!")
-        mainView.refresh()
     }
 }

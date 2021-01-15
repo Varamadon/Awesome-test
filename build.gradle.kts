@@ -30,6 +30,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("com.atlassian.commonmark:commonmark:0.16.1")
     implementation("com.vaadin:vaadin-spring-boot-starter")
     implementation("com.github.mvysny.karibudsl:karibu-dsl:$karibudslVersion")

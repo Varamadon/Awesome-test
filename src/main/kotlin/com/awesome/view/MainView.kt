@@ -9,24 +9,29 @@ import com.github.mvysny.karibudsl.v10.isExpand
 import com.github.mvysny.karibudsl.v10.textField
 import com.github.mvysny.karibudsl.v10.verticalLayout
 import com.vaadin.flow.component.Text
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.accordion.Accordion
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Anchor
 import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
+import com.vaadin.flow.component.page.Push
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.data.value.ValueChangeMode
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.server.PWA
+import com.vaadin.flow.server.VaadinSession
 import com.vaadin.flow.spring.annotation.UIScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit.DAYS
 
-
-@Component
+@UIScope
+@Push
 @Route("")
 @PWA(name = "Project Base for Vaadin", shortName = "Project Base")
 @CssImport.Container(
@@ -58,7 +63,7 @@ class MainView(
 
     init {
         root.setWidthFull()
-        root.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER)
+        root.defaultHorizontalComponentAlignment = FlexComponent.Alignment.CENTER
 
         searchField.valueChangeMode = ValueChangeMode.EAGER
         searchField.addValueChangeListener {
@@ -72,9 +77,17 @@ class MainView(
         searchResult.setWidthFull()
         sections.isExpand = true
         sections.setWidthFull()
+//        GlobalScope.launch {
+//            while (true) {
+//                delay(500L)
+//                ui.get().access {
+//                    refresh()
+//                }
+//            }
+//        }
     }
 
-    fun refresh() {
+    private fun refresh() {
         refreshSections()
         refreshSearchResult(searchField.value)
     }
@@ -106,12 +119,12 @@ class MainView(
     }
 
     private fun renderRepo(repo: Repo): HorizontalLayout {
-        val daysSinceLastCommit = DAYS.between(LocalDate.now(), repo.lastCommit)
+        val daysSinceLastCommit = DAYS.between(repo.lastCommit, LocalDate.now())
         val displayText =
             " ⭐" + repo.starsCount + " \uD83D\uDCC5 " + daysSinceLastCommit + " — " + repo.description
         val link = Anchor(repo.link, repo.name)
 
-        val result =  HorizontalLayout(link, Text(displayText))
+        val result = HorizontalLayout(link, Text(displayText))
         result.setWidthFull()
         return result
     }

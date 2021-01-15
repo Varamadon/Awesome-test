@@ -70,3 +70,32 @@ class GithubApiInteractorIml(
         return githubApiRepoLinkPrefix + pathParts[0] + "/" + pathParts[1]
     }
 }
+
+const val testMd =
+    "# Awesome Elixir [![Build Status](https://api.travis-ci.org/h4cc/awesome-elixir.svg?branch=master)](https://travis-ci.org/h4cc/awesome-elixir) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)\n" +
+            "A curated list of amazingly awesome Elixir libraries, resources, and shiny things inspired by [awesome-php](https://github.com/ziadoz/awesome-php).\n" +
+            "\n" +
+            "If you think a package should be added, please add a :+1: (`:+1:`) at the according issue or create a new one.\n" +
+            "\n" +
+            "There are [other sites with curated lists of elixir packages](#other-awesome-lists) which you can have a look at.\n" +
+            "\n" +
+            "- [Awesome Elixir](#awesome-elixir)\n" +
+            "    - [Actors](#actors)\n" +
+            "    - [Algorithms and Data structures](#algorithms-and-data-structures)\n" +
+            "\n" +
+            "## Actors\n" +
+            "*Libraries and tools for working with actors and such.*\n" +
+            "\n" +
+            "* [bpe](https://github.com/spawnproc/bpe) - Business Process Engine in Erlang. ([Doc](https://bpe.n2o.dev)).\n" +
+            "* [dflow](https://github.com/dalmatinerdb/dflow) - Pipelined flow processing engine.\n" +
+            "* [exactor](https://github.com/sasa1977/exactor) - Helpers for easier implementation of actors in Elixir.\n" +
+            "* [exos](https://github.com/awetzel/exos) - A Port Wrapper which forwards cast and call to a linked Port.\n" +
+            "* [flowex](https://github.com/antonmi/flowex) - Railway Flow-Based Programming with Elixir GenStage.\n" +
+            "\n" +
+            "## Algorithms and Data structures\n" +
+            "*Libraries and implementations of algorithms and data structures.*\n" +
+            "\n" +
+            "* [array](https://github.com/takscape/elixir-array) - An Elixir wrapper library for Erlang's array.\n" +
+            "* [aruspex](https://github.com/dkendal/aruspex) - Aruspex is a configurable constraint solver, written purely in Elixir.\n" +
+            "* [bimap](https://githyuhub.com/mkaput/elixir-bimap) - Pure Elixir implementation of [bidirectional maps](https://en.wikipedia.org/wiki/Bidirectional_map) and multimaps.\n" +
+            "* [bitmap](https://github.com/hashd/bitmap-elixir) - Pure Elixir implementation of [bitmaps](https://en.wikipedia.org/wiki/Bitmap).\n"
