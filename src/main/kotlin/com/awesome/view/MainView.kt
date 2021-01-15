@@ -12,12 +12,14 @@ import com.vaadin.flow.component.Text
 import com.vaadin.flow.component.accordion.Accordion
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Anchor
+import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.data.value.ValueChangeMode
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.server.PWA
+import com.vaadin.flow.spring.annotation.UIScope
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.LocalDate
@@ -45,8 +47,6 @@ class MainView(
     private val root = ui {
         // Use custom CSS classes to apply styling. This is defined in shared-styles.css.
         verticalLayout(classNames = "centered-content") {
-            isExpand = true
-            setWidthFull()
 
             minStarsField = textField("Minimum stars")
             searchField = textField("Search:")
@@ -57,6 +57,9 @@ class MainView(
     }
 
     init {
+        root.setWidthFull()
+        root.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER)
+
         searchField.valueChangeMode = ValueChangeMode.EAGER
         searchField.addValueChangeListener {
             refreshSearchResult(searchField.value)
@@ -81,7 +84,8 @@ class MainView(
         sections.children.forEach { sections.remove(it) }
         val sectionList = repoService.getSections(minStars)
         for (section in sectionList) {
-            sections.add(section.title, renderSection(section))
+            val panel = sections.add(section.title, renderSection(section))
+            panel.isOpened = false
         }
     }
 
@@ -89,7 +93,7 @@ class MainView(
         searchResult.children.forEach { searchResult.remove(it) }
         val repoSet = repoService.findRepoByNamePart(namePart)
         for (repo in repoSet) {
-            searchResult.add(renderRepo(repo))
+            searchResult.addAndExpand(renderRepo(repo))
         }
     }
 
@@ -97,7 +101,7 @@ class MainView(
         val result = VerticalLayout()
         section.repos
             .map { renderRepo(it) }
-            .forEach { result.add(it) }
+            .forEach { result.addAndExpand(it) }
         return result
     }
 

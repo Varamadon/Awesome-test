@@ -2,13 +2,12 @@ package com.awesome.loader.api
 
 import com.awesome.loader.MockAuthProvider
 import com.awesome.loader.testBrokenRepoLink
-import com.awesome.loader.testPassword
 import com.awesome.loader.testRepoApiLink
 import com.awesome.loader.testRepoCommitsApiLink
 import com.awesome.loader.testRepoLink
 import com.awesome.loader.testToken
-import com.awesome.loader.testUser
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.`when`
@@ -19,7 +18,6 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
-import java.lang.IllegalArgumentException
 
 internal class GithubApiInteractorImlTest {
     private val authProvider = MockAuthProvider()
@@ -28,17 +26,19 @@ internal class GithubApiInteractorImlTest {
     @Test
     fun testGettingReadme() {
         val restTemplate = mock(RestTemplate::class.java)
-        val readme = testMd
+        val readme = "ololo"
         val response = ResponseEntity(readme, HttpStatus.OK)
         val headers = HttpHeaders()
         headers.setBearerAuth(testToken)
         val entity = HttpEntity<String>(headers)
-        `when`(restTemplate.exchange(
-            ArgumentMatchers.eq(awesomeReadmeLink),
-            ArgumentMatchers.eq(HttpMethod.GET),
-            ArgumentMatchers.eq(entity),
-            ArgumentMatchers.eq(String::class.java)
-        )).thenReturn(response)
+        `when`(
+            restTemplate.exchange(
+                ArgumentMatchers.eq(awesomeReadmeLink),
+                ArgumentMatchers.eq(HttpMethod.GET),
+                ArgumentMatchers.eq(entity),
+                ArgumentMatchers.eq(String::class.java)
+            )
+        ).thenReturn(response)
 
         val result = githubApiInteractor.getReadmeMD(restTemplate)
         assertEquals(readme, result)
@@ -47,13 +47,13 @@ internal class GithubApiInteractorImlTest {
     @Test
     fun testGettingRepoInfo() {
         val restTemplate = mock(RestTemplate::class.java)
-        val repoInfo: Map<*,*> = mapOf(
+        val repoInfo: Map<*, *> = mapOf(
             Pair("name", "testName"),
             Pair("description", "testDescription"),
             Pair("stargazers_count", 140),
             Pair("last_commit_date", "2017-10-19T17:04:49Z")
         )
-        val rawRepoInfo: Map<*,*> = mapOf(
+        val rawRepoInfo: Map<*, *> = mapOf(
             Pair("name", "testName"),
             Pair("description", "testDescription"),
             Pair("stargazers_count", 140)
@@ -70,19 +70,23 @@ internal class GithubApiInteractorImlTest {
         headers.setBearerAuth(testToken)
         val entity = HttpEntity<String>(headers)
 
-        `when`(restTemplate.exchange(
-            ArgumentMatchers.eq(testRepoApiLink),
-            ArgumentMatchers.eq(HttpMethod.GET),
-            ArgumentMatchers.eq(entity),
-            ArgumentMatchers.eq(Map::class.java)
-        )).thenReturn(rawRepoResponse)
+        `when`(
+            restTemplate.exchange(
+                ArgumentMatchers.eq(testRepoApiLink),
+                ArgumentMatchers.eq(HttpMethod.GET),
+                ArgumentMatchers.eq(entity),
+                ArgumentMatchers.eq(Map::class.java)
+            )
+        ).thenReturn(rawRepoResponse)
 
-        `when`(restTemplate.exchange(
-            ArgumentMatchers.eq(testRepoCommitsApiLink),
-            ArgumentMatchers.eq(HttpMethod.GET),
-            ArgumentMatchers.eq(entity),
-            ArgumentMatchers.eq(List::class.java)
-        )).thenReturn(commitResponse)
+        `when`(
+            restTemplate.exchange(
+                ArgumentMatchers.eq(testRepoCommitsApiLink),
+                ArgumentMatchers.eq(HttpMethod.GET),
+                ArgumentMatchers.eq(entity),
+                ArgumentMatchers.eq(List::class.java)
+            )
+        ).thenReturn(commitResponse)
 
         val result = githubApiInteractor.getRepoInfo(restTemplate, testRepoLink)
         assertEquals(repoInfo, result)
