@@ -5,11 +5,14 @@ import com.awesome.model.Section
 import com.awesome.model.service.RepoService
 import com.github.mvysny.karibudsl.v10.KComposite
 import com.github.mvysny.karibudsl.v10.accordion
+import com.github.mvysny.karibudsl.v10.isExpand
 import com.github.mvysny.karibudsl.v10.textField
 import com.github.mvysny.karibudsl.v10.verticalLayout
 import com.vaadin.flow.component.Text
 import com.vaadin.flow.component.accordion.Accordion
 import com.vaadin.flow.component.dependency.CssImport
+import com.vaadin.flow.component.html.Anchor
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.data.value.ValueChangeMode
@@ -42,13 +45,14 @@ class MainView(
     private val root = ui {
         // Use custom CSS classes to apply styling. This is defined in shared-styles.css.
         verticalLayout(classNames = "centered-content") {
+            isExpand = true
+            setWidthFull()
 
             minStarsField = textField("Minimum stars")
             searchField = textField("Search:")
 
             searchResult = verticalLayout()
             sections = accordion()
-
         }
     }
 
@@ -61,6 +65,10 @@ class MainView(
         minStarsField.addValueChangeListener {
             refreshSections()
         }
+        searchResult.isExpand = true
+        searchResult.setWidthFull()
+        sections.isExpand = true
+        sections.setWidthFull()
     }
 
     fun refresh() {
@@ -93,11 +101,14 @@ class MainView(
         return result
     }
 
-    private fun renderRepo(repo: Repo): Text {
+    private fun renderRepo(repo: Repo): HorizontalLayout {
         val daysSinceLastCommit = DAYS.between(LocalDate.now(), repo.lastCommit)
         val displayText =
-            repo.name + " ⭐" + repo.starsCount + " \uD83D\uDCC5 " + daysSinceLastCommit + " — " + repo.description
+            " ⭐" + repo.starsCount + " \uD83D\uDCC5 " + daysSinceLastCommit + " — " + repo.description
+        val link = Anchor(repo.link, repo.name)
 
-        return Text(displayText)
+        val result =  HorizontalLayout(link, Text(displayText))
+        result.setWidthFull()
+        return result
     }
 }

@@ -28,7 +28,7 @@ internal class GithubApiInteractorImlTest {
     @Test
     fun testGettingReadme() {
         val restTemplate = mock(RestTemplate::class.java)
-        val readme = "ololo"
+        val readme = testMd
         val response = ResponseEntity(readme, HttpStatus.OK)
         val headers = HttpHeaders()
         headers.setBearerAuth(testToken)

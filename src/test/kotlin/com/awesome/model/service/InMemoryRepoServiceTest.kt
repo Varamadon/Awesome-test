@@ -12,15 +12,15 @@ import java.time.LocalDate
 internal class InMemoryRepoServiceTest {
     private val service = InMemoryRepoService()
 
-    private val rabbitRepo = Repo("rabbit", "super lib1", 5, LocalDate.now())
-    private val legRepo = Repo("leg", "super lib2", 15, LocalDate.now())
-    private val octopusRepo = Repo("octopus", "super lib3", 25, LocalDate.now())
-    private val horseRepo = Repo("horse", "super lib4", 35, LocalDate.now())
-    private val abbotRepo = Repo("abbot", "super lib5", 45, LocalDate.now())
-    private val legendaryRepo = Repo("legendary", "super lib", 55, LocalDate.now())
-    private val eggsRepo = Repo("eggs", "super lib", 65, LocalDate.now())
-    private val ornamentsRepo = Repo("ornaments", "super lib", 75, LocalDate.now())
-    private val octoberRepo = Repo("october", "super lib", 85, LocalDate.now())
+    private val rabbitRepo = Repo("rabbit", "testLink", "super lib1", 5, LocalDate.now())
+    private val legRepo = Repo("leg", "testLink", "super lib2", 15, LocalDate.now())
+    private val octopusRepo = Repo("octopus", "testLink", "super lib3", 25, LocalDate.now())
+    private val horseRepo = Repo("horse", "testLink", "super lib4", 35, LocalDate.now())
+    private val abbotRepo = Repo("abbot", "testLink", "super lib5", 45, LocalDate.now())
+    private val legendaryRepo = Repo("legendary", "testLink", "super lib", 55, LocalDate.now())
+    private val eggsRepo = Repo("eggs", "testLink", "super lib", 65, LocalDate.now())
+    private val ornamentsRepo = Repo("ornaments", "testLink", "super lib", 75, LocalDate.now())
+    private val octoberRepo = Repo("october", "testLink", "super lib", 85, LocalDate.now())
 
     private val repos = listOf(
         rabbitRepo,

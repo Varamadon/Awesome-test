@@ -72,6 +72,7 @@ class GithubRepoLoader(
             val repoInfo = apiInteractor.getRepoInfo(RestTemplate(), link)
             val repo = Repo(
                 repoInfo["name"] as String,
+                link,
                 if (repoInfo["description"] != null) repoInfo["description"] as String else "",
                 repoInfo["stargazers_count"] as Int,
                 getLocalDateFromISO8601String(repoInfo["last_commit_date"] as String)
